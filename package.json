@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "dev": "next dev -p 3005",
+    "dev": "next dev -p 57006",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 57005",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

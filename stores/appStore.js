@@ -1,10 +1,10 @@
 import { create } from 'zustand'
-import { persist, createJSONStorage } from 'zustand/middleware'
+import { createJSONStorage, persist } from 'zustand/middleware'
 
 export const useAppStore = create(
   persist(
     (set, get) => ({
-      language: 'en',
+      language: 'ko',
       endpoint: 'transcriptions',
       prompt: '',
       temperature: 0,

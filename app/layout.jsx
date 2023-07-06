@@ -1,8 +1,8 @@
-import '../styles/main.css'
+import '../styles/main.css';
 
 export default function RootLayout({ children }) {
     return (
-      <html lang="en">
+      <html lang="ko">
         <body>{children}</body>
       </html>
     );

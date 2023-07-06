@@ -1,8 +1,8 @@
+import axios from 'axios'
+import { exec } from 'child_process'
+import FormData from 'form-data'
 import fs from 'fs'
 import path from 'path'
-import { exec } from 'child_process'
-import axios from 'axios'
-import FormData from 'form-data'
 
 import { cleanInput } from '../../lib/utils'
 

@@ -7,16 +7,16 @@ import classes from './mainPage.module.css'
 
 import { startStates } from './startbutton'
 
+import AudioModal from './audiomodal'
 import ControlPanel from './controlPanel'
 import Dialog from './dialog'
-import SnackBar from './snackbar'
-import AudioModal from './audiomodal'
 import Modal from './modal'
+import SnackBar from './snackbar'
 
 import Transcript from './transcript'
 
-import { useAppStore } from '../stores/appStore'
 import { useAppData } from '../stores/appData'
+import { useAppStore } from '../stores/appStore'
 
 export default function MainPage() {
 
@@ -459,7 +459,7 @@ export default function MainPage() {
             {
                 (isMounted && isReady && transcripts.length === 0) &&
                 <div className={classes.mainError}>
-                    <span className={classes.info}>No transcripts</span>
+                    <span className={classes.info}>입력된 내용이 없습니다.</span>
                 </div>
             }
             {

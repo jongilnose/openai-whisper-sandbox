@@ -13,7 +13,7 @@ This repository is a sandbox created to test the performance of popular Speech t
 3. Navigate into the project directory
 
    ```bash
-   $ cd speech-to-text-sandbox
+   $ cd openai-whisper-sandbox
    ```
 
 4. Install the requirements

@@ -1,4 +1,4 @@
-import MainPage from '../components/mainPage'
+import MainPage from '../components/mainPage';
 
 export const metadata = {
     title: 'Whisper API Sample App',
@@ -15,6 +15,6 @@ export const metadata = {
     }
 }
 
-export default function Page({ props }) {
-    return <MainPage {...props} />;
+export default function Page() {
+    return <MainPage />;
 }

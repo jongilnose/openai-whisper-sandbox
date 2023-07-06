@@ -61,7 +61,7 @@ export default function Dialog({ onClose = undefined }) {
                         <label className={classes.label}>API 선택</label>
                         <select className={classes.select} value={endpoint} onChange={(e) => setEndpoint(e.target.value)}>
                             <option value="transcriptions">Transcriptions</option>
-                            <option value="translations">Translations</option>
+                            {/* <option value="translations">Translations</option> */}
                         </select>
                     </div>
                     <div className={classes.item}>

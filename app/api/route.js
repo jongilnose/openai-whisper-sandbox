@@ -151,7 +151,7 @@ export async function POST(req) {
 
         }).catch((error) => {
             
-            reject(error) // Maybe rather than sending the whole error message, set some status value
+            reject(error.response.data) // Maybe rather than sending the whole error message, set some status value
 
         })
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import classes from './dialog.module.css'
@@ -33,7 +32,7 @@ export default function Dialog({ onClose = undefined }) {
                 <div className={classes.contents}>
                     <h4 className={classes.subtitle}>Recording</h4>
                     <div className={classes.item}>
-                        <label className={classes.label}>MaxPause</label>
+                        <label className={classes.label}>최대 일시정지</label>
                         <select className={classes.select} value={interval} onChange={(e) => setInterval(e.target.value)}>
                             <option value={2500}>2500 ms</option>
                             <option value={3000}>3000 ms</option>
@@ -44,7 +43,7 @@ export default function Dialog({ onClose = undefined }) {
                         </select>
                     </div>
                     <div className={classes.item}>
-                        <label className={classes.label}>MinDecibels</label>
+                        <label className={classes.label}>최소 데시벨</label>
                         <select className={classes.select} value={threshold} onChange={(e) => setThreshold(e.target.value)}>
                             <option value={-70}>-70 dB</option>
                             <option value={-65}>-65 dB</option>
@@ -59,14 +58,14 @@ export default function Dialog({ onClose = undefined }) {
                     </div>
                     <h4 className={classes.subtitle}>Speech to Text</h4>
                     <div className={classes.item}>
-                        <label className={classes.label}>Endpoint</label>
+                        <label className={classes.label}>API 선택</label>
                         <select className={classes.select} value={endpoint} onChange={(e) => setEndpoint(e.target.value)}>
                             <option value="transcriptions">Transcriptions</option>
                             <option value="translations">Translations</option>
                         </select>
                     </div>
                     <div className={classes.item}>
-                        <label className={classes.label}>Language</label>
+                        <label className={classes.label}>언어 선택</label>
                         <select className={classes.select} value={language} onChange={(e) => setLanguage(e.target.value)}>
                         {
                             languages.languages.map((item) => {
@@ -91,7 +90,7 @@ export default function Dialog({ onClose = undefined }) {
                     </div>
                 </div>
                 <div className={classes.action}>
-                    <button className={classes.button} onClick={onClose}>Close</button>
+                    <button className={classes.button} onClick={onClose}>닫기</button>
                 </div>
             </div>
         </div>

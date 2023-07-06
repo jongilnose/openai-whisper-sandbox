@@ -1,4 +1,4 @@
-# Speech To Text Sandbox
+# OpenAI Whisper Sandbox
 
 
 ## Introduction

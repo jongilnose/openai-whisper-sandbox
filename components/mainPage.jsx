@@ -108,7 +108,7 @@ export default function MainPage() {
     
         } else {
     
-            setErrorMessage('Media devices not supported')
+            setErrorMessage('음성장비들을 지원하지 않는 환경입니다.')
             
         }
 
@@ -146,7 +146,7 @@ export default function MainPage() {
 
     const handleError = (error) => {
         console.log(error)
-        setErrorMessage('Error calling getUserMedia')
+        setErrorMessage('음성 장비가 연결되어 있지 않거나 불러올 수 없는 브라우저 환경입니다.')
     }
 
     const handleStream = (stream) => {
@@ -499,7 +499,7 @@ export default function MainPage() {
             }
             {
                 openSnack && createPortal(
-                    <SnackBar onClose={handleCloseSnack} text="Problem sending the request to remote Whisper API." />,
+                    <SnackBar onClose={handleCloseSnack} text="원격 Whisper API로 요청을 보내는 데 문제가 있습니다." />,
                     document.body,
                 )
             }
@@ -511,7 +511,7 @@ export default function MainPage() {
             }
             {
                 openModal && createPortal(
-                    <Modal text='Are you sure you want to delete this transcript?' 
+                    <Modal text='이 스크립트를 삭제하시겠습니까?' 
                     buttonText='Delete' onButtonClick={handleClickModal} onCancel={handleCloseModal} />,
                     document.body,
                 )

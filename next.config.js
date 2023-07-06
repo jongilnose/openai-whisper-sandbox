@@ -16,7 +16,7 @@ const nextConfig = {
     return config
   },
   env: {
-    siteTitle: 'Whisper API Sample App',
+    siteTitle: 'openai-whisper-sandbox',
   },
   async headers() {
     return [

@@ -115,13 +115,13 @@ export default function MainPage() {
         }
 
         if (/Android/i.test(navigator.userAgent)) {
-            setAudioMimeType('webm;codecs=opus')
+            setAudioMimeType('webm') //;codecs=opus
         }
         else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
             setAudioMimeType('mp4')
         }
         else if (navigator.userAgent.indexOf("Chrome") > -1) {
-            setAudioMimeType('webm;codecs=opus')
+            setAudioMimeType('webm')
         }
         else if (navigator.userAgent.indexOf("Safari") > -1) {
             setAudioMimeType('mp4')

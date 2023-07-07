@@ -27,7 +27,7 @@ export async function POST(req) {
     const options = JSON.parse(raw_options)
 
     const buffer = Buffer.from( await blob.arrayBuffer() )
-    const filename = `${name}.wav`
+    const filename = `${name}.m4a`
     let filepath = `${path.join('public', 'uploads', filename)}`
     
     fs.writeFileSync(filepath, buffer)

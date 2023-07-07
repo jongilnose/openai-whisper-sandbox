@@ -155,7 +155,7 @@ export default function MainPage() {
             
             mediaRef.current = new MediaRecorder(stream, {
                 audioBitsPerSecond: 128000,
-                mimeType: 'audio/m4a;codecs=opus',
+                mimeType: 'audio/m4a',
             })
 
         } catch(error) {
@@ -283,7 +283,7 @@ export default function MainPage() {
 
     const handleStop = () => {
 
-        const blob = new Blob(chunksRef.current, {type: 'audio/m4a;codecs=opus'})
+        const blob = new Blob(chunksRef.current, {type: 'audio/m4a'})
         
         const datetime = recordDateTime.current
         const name = `file${Date.now()}` + Math.round(Math.random() * 100000)

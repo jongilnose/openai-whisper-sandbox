@@ -106,7 +106,6 @@ export default function MainPage() {
     React.useEffect(() => {
 
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-
             navigator.mediaDevices.getUserMedia({ audio: true }).then(handleStream).catch(handleError)
     
         } else {
@@ -199,9 +198,11 @@ export default function MainPage() {
         else if (navigator.userAgent.indexOf("Safari") > -1) {
             mimeType = 'wav'
             audioCodec = ''
+        }else{
+            mimeType = 'webm'
+            audioCodec = ';codecs=opus'
         }
-        setAudioMimeType(mimeType)
-        setAudioCodec(audioCodec)
+  
         return {
             mimeType : mimeType,
             audioCodec : audioCodec
@@ -336,9 +337,11 @@ export default function MainPage() {
             temperature: temperature,
         }
 
+
+        const {mimeType} = handleMimeType()
         let formData = new FormData()
-        formData.append('file', file, `${name}.${audioMimeType}`)
-        formData.append('mimetype', audioMimeType)
+        formData.append('file', file, `${name}.${mimeType}`)
+        formData.append('mimetype', mimeType)
         formData.append('name', name)
         formData.append('datetime', datetime)
         formData.append('options', JSON.stringify(options))

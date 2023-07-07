@@ -115,23 +115,6 @@ export default function MainPage() {
             
         }
 
-        if (/Android/i.test(navigator.userAgent)) {
-            setAudioMimeType('webm')
-            setAudioCodec(';codecs=opus')
-        }
-        else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-            setAudioMimeType('mp4')
-            setAudioCodec('')
-        }
-        else if (navigator.userAgent.indexOf("Chrome") > -1) {
-            setAudioMimeType('webm')
-            setAudioCodec(';codecs=opus')
-        }
-        else if (navigator.userAgent.indexOf("Safari") > -1) {
-            setAudioMimeType('mp4')
-            setAudioCodec('')
-        }
-
         return () => {
 
             try {
@@ -173,10 +156,10 @@ export default function MainPage() {
     const handleStream = (stream) => {
 
         try {
-            
+            const {mimeType, audioCodec} = handleMimeType()
             mediaRef.current = new MediaRecorder(stream, {
                 audioBitsPerSecond: 128000,
-                mimeType: `audio/${audioMimeType}${audioCodec}`,
+                mimeType: `audio/${mimeType}${audioCodec}`,
             })
 
         } catch(error) {
@@ -196,6 +179,33 @@ export default function MainPage() {
 
         checkAudioLevel(stream)
 
+    }
+
+    const handleMimeType = () => {
+        let mimeType = ''
+        let audioCodec = ''
+        if (/Android/i.test(navigator.userAgent)) {
+            mimeType = 'webm'
+            audioCodec = ';codecs=opus'
+        }
+        else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            mimeType = 'mp4'
+            audioCodec = ''
+        }
+        else if (navigator.userAgent.indexOf("Chrome") > -1) {
+            mimeType = 'webm'
+            audioCodec = ';codecs=opus'
+        }
+        else if (navigator.userAgent.indexOf("Safari") > -1) {
+            mimeType = 'mp4'
+            audioCodec = ''
+        }
+        setAudioMimeType(mimeType)
+        setAudioCodec(audioCodec)
+        return {
+            mimeType : mimeType,
+            audioCodec : audioCodec
+        }
     }
 
     const checkAudioLevel = (stream) => {

@@ -67,6 +67,7 @@ export default function MainPage() {
     const [isMounted, setMounted] = React.useState(false)
 
     const [audioMimeType, setAudioMimeType] = React.useState('')
+    const [audioCodec, setAudioCodec] = React.useState('')
     
 
     React.useEffect(() => {
@@ -115,16 +116,20 @@ export default function MainPage() {
         }
 
         if (/Android/i.test(navigator.userAgent)) {
-            setAudioMimeType('webm') //;codecs=opus
+            setAudioMimeType('webm')
+            setAudioCodec(';codecs=opus')
         }
         else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
             setAudioMimeType('mp4')
+            setAudioCodec('')
         }
         else if (navigator.userAgent.indexOf("Chrome") > -1) {
             setAudioMimeType('webm')
+            setAudioCodec(';codecs=opus')
         }
         else if (navigator.userAgent.indexOf("Safari") > -1) {
             setAudioMimeType('mp4')
+            setAudioCodec('')
         }
 
         return () => {
@@ -171,7 +176,7 @@ export default function MainPage() {
             
             mediaRef.current = new MediaRecorder(stream, {
                 audioBitsPerSecond: 128000,
-                mimeType: `audio/${audioMimeType}`,
+                mimeType: `audio/${audioMimeType}${audioCodec}`,
             })
 
         } catch(error) {
@@ -299,7 +304,7 @@ export default function MainPage() {
 
     const handleStop = () => {
 
-        const blob = new Blob(chunksRef.current, {type: `audio/${audioMimeType}`})
+        const blob = new Blob(chunksRef.current, {type: `audio/${audioMimeType}${audioCodec}`})
         
         const datetime = recordDateTime.current
         const name = `file${Date.now()}` + Math.round(Math.random() * 100000)

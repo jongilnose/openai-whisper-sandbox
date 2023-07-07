@@ -155,7 +155,7 @@ export default function MainPage() {
             
             mediaRef.current = new MediaRecorder(stream, {
                 audioBitsPerSecond: 128000,
-                mimeType: 'audio/webm',
+                mimeType: 'audio/mp3',
             })
 
         } catch(error) {
@@ -283,11 +283,11 @@ export default function MainPage() {
 
     const handleStop = () => {
 
-        const blob = new Blob(chunksRef.current, {type: 'audio/webm'})
+        const blob = new Blob(chunksRef.current, {type: 'audio/mp3'})
         
         const datetime = recordDateTime.current
         const name = `file${Date.now()}` + Math.round(Math.random() * 100000)
-        const file = new File([blob], `${name}.webm`)
+        const file = new File([blob], `${name}.mp3`)
 
         chunksRef.current = []
         
@@ -306,7 +306,7 @@ export default function MainPage() {
         }
 
         let formData = new FormData()
-        formData.append('file', file, `${name}.webm`)
+        formData.append('file', file, `${name}.mp3`)
         formData.append('name', name)
         formData.append('datetime', datetime)
         formData.append('options', JSON.stringify(options))

@@ -65,6 +65,8 @@ export default function MainPage() {
     const [openModal, setOpenModal] = React.useState(false)
 
     const [isMounted, setMounted] = React.useState(false)
+
+    const [audioMimeType, setAudioMimeType] = React.useState('')
     
 
     React.useEffect(() => {
@@ -112,6 +114,19 @@ export default function MainPage() {
             
         }
 
+        if (/Android/i.test(navigator.userAgent)) {
+            setAudioMimeType('webm;codecs=opus')
+        }
+        else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            setAudioMimeType('mp4')
+        }
+        else if (navigator.userAgent.indexOf("Chrome") > -1) {
+            setAudioMimeType('webm;codecs=opus')
+        }
+        else if (navigator.userAgent.indexOf("Safari") > -1) {
+            setAudioMimeType('mp4')
+        }
+
         return () => {
 
             try {
@@ -125,6 +140,7 @@ export default function MainPage() {
         }
 
     }, [minDecibels, maxPause,language, endpoint, temperature])
+
 
     React.useEffect(() => {
 
@@ -155,7 +171,7 @@ export default function MainPage() {
             
             mediaRef.current = new MediaRecorder(stream, {
                 audioBitsPerSecond: 128000,
-                mimeType: 'audio/mp3',
+                mimeType: `audio/${audioMimeType}`,
             })
 
         } catch(error) {
@@ -283,11 +299,11 @@ export default function MainPage() {
 
     const handleStop = () => {
 
-        const blob = new Blob(chunksRef.current, {type: 'audio/mp3'})
+        const blob = new Blob(chunksRef.current, {type: `audio/${audioMimeType}`})
         
         const datetime = recordDateTime.current
         const name = `file${Date.now()}` + Math.round(Math.random() * 100000)
-        const file = new File([blob], `${name}.mp3`)
+        const file = new File([blob], `${name}.${audioMimeType}`)
 
         chunksRef.current = []
         
@@ -306,7 +322,8 @@ export default function MainPage() {
         }
 
         let formData = new FormData()
-        formData.append('file', file, `${name}.mp3`)
+        formData.append('file', file, `${name}.${audioMimeType}`)
+        formData.append('mimetype', audioMimeType)
         formData.append('name', name)
         formData.append('datetime', datetime)
         formData.append('options', JSON.stringify(options))

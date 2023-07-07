@@ -11,6 +11,7 @@ export async function POST(req) {
     const form = await req.formData()
     
     const blob = form.get('file')
+    const mimetype = cleanInput(form.get('mimetype'))
     const name = cleanInput(form.get('name'))
     const datetime = cleanInput(form.get('datetime'))
     const raw_options = cleanInput(form.get('options'))
@@ -27,7 +28,7 @@ export async function POST(req) {
     const options = JSON.parse(raw_options)
 
     const buffer = Buffer.from( await blob.arrayBuffer() )
-    const filename = `${name}.mp3`
+    const filename = `${name}.${mimetype}`
     let filepath = `${path.join('public', 'uploads', filename)}`
     
     fs.writeFileSync(filepath, buffer)

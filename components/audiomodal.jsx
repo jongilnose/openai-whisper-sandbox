@@ -1,9 +1,9 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
-import PlayOffIcon from './playoff'
-import PlayIcon from './play'
 import PauseIcon from './pause'
+import PlayIcon from './play'
+import PlayOffIcon from './playoff'
 
 import classes from './audiomodal.module.css'
 
@@ -17,16 +17,15 @@ export default function AudioModal({ file, onClose }) {
     const [isReady, setReady] = React.useState(false)
     
     React.useEffect(() => {
-
+        const {mimeType} = handleMimeType()
         audioDomRef.current = new Audio()
-        audioDomRef.current.type = "audio/mp4"
+        audioDomRef.current.type = `audio/${mimeType}`
 
         audioDomRef.current.addEventListener('loadedmetadata', handleLoad)
         //audioDomRef.current.addEventListener('canplay', () => console.log("[can play]"))
         //audioDomRef.current.addEventListener('canplaythrough', () => console.log("[can playthru]"))
         audioDomRef.current.addEventListener('ended', handleEnded)
         audioDomRef.current.addEventListener('error', handleError)
-
         audioDomRef.current.src = `/uploads/${file}`
 
         return () => {
@@ -40,6 +39,36 @@ export default function AudioModal({ file, onClose }) {
         }
             
     }, [])
+
+
+    const handleMimeType = () => {
+        let mimeType = ''
+        let audioCodec = ''
+        if (/Android/i.test(navigator.userAgent)) {
+            mimeType = 'webm'
+            audioCodec = ';codecs=opus'
+        }
+        else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            mimeType = 'wav'
+            audioCodec = ''
+        }
+        else if (navigator.userAgent.indexOf("Chrome") > -1) {
+            mimeType = 'webm'
+            audioCodec = ';codecs=opus'
+        }
+        else if (navigator.userAgent.indexOf("Safari") > -1) {
+            mimeType = 'wav'
+            audioCodec = ''
+        }else{
+            mimeType = 'webm'
+            audioCodec = ';codecs=opus'
+        }
+  
+        return {
+            mimeType : mimeType,
+            audioCodec : audioCodec
+        }
+    }
 
     const handleEnded = React.useCallback(() => {
 

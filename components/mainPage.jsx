@@ -189,7 +189,7 @@ export default function MainPage() {
             audioCodec = ';codecs=opus'
         }
         else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-            mimeType = 'mp4'
+            mimeType = 'wav'
             audioCodec = ''
         }
         else if (navigator.userAgent.indexOf("Chrome") > -1) {
@@ -197,7 +197,7 @@ export default function MainPage() {
             audioCodec = ';codecs=opus'
         }
         else if (navigator.userAgent.indexOf("Safari") > -1) {
-            mimeType = 'mp4'
+            mimeType = 'wav'
             audioCodec = ''
         }
         setAudioMimeType(mimeType)

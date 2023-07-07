@@ -155,7 +155,7 @@ export default function MainPage() {
             
             mediaRef.current = new MediaRecorder(stream, {
                 audioBitsPerSecond: 128000,
-                mimeType: 'audio/wav;codecs=opus',
+                mimeType: 'audio/m4a;codecs=opus',
             })
 
         } catch(error) {
@@ -283,11 +283,11 @@ export default function MainPage() {
 
     const handleStop = () => {
 
-        const blob = new Blob(chunksRef.current, {type: 'audio/wav;codecs=opus'})
+        const blob = new Blob(chunksRef.current, {type: 'audio/m4a;codecs=opus'})
         
         const datetime = recordDateTime.current
         const name = `file${Date.now()}` + Math.round(Math.random() * 100000)
-        const file = new File([blob], `${name}.wav`)
+        const file = new File([blob], `${name}.m4a`)
 
         chunksRef.current = []
         
@@ -306,7 +306,7 @@ export default function MainPage() {
         }
 
         let formData = new FormData()
-        formData.append('file', file, `${name}.wav`)
+        formData.append('file', file, `${name}.m4a`)
         formData.append('name', name)
         formData.append('datetime', datetime)
         formData.append('options', JSON.stringify(options))
